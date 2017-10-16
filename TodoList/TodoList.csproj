@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Domain\" />
+    <Folder Include="Features\" />
+    <Folder Include="Infraestructure\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
