@@ -9,6 +9,14 @@ namespace TodoList.Infraestructure
 {
     public class Db : DbContext
     {
+        #region Tables
+
+        public DbSet<Domain.Task> Task { get; set; }
+
+        public DbSet<Item> Item { get; set; }
+
+        #endregion Tables
+
         public Db(DbContextOptions<Db> options) : base(options)
         {
         }
