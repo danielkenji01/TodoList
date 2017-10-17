@@ -21,11 +21,11 @@ namespace TodoList.Domain
 
         public DateTime? DeletedAt { get; set; }
 
-        public Guid TaskId { get; set; }
+        public Guid AssignmentId { get; set; }
 
         #region Navigation
 
-        public virtual Task Task { get; set; }
+        public virtual Assignment Assignment { get; set; }
 
         #endregion Navigation
     }
