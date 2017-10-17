@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TodoList.Domain
 {
-    public class Task
+    public class Assignment
     {
         public Guid Id { get; set; }
 
