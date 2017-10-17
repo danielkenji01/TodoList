@@ -4,11 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using TodoList.Features.Assignment;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace TodoList.Features.Task
+namespace TodoList.Features.Assignment
 {
     [Route("api/[controller]")]
     public class AssignmentController : Controller
@@ -32,6 +31,15 @@ namespace TodoList.Features.Task
         public async Task<IList<List.Result>> List()
         {
             var result = await mediator.Send(new List.Query());
+
+            return result;
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<Read.Result> Read(Read.Query query)
+        {
+            var result = await mediator.Send(query);
 
             return result;
         }
