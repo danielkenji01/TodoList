@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TodoList.Domain;
 
 namespace TodoList.Infraestructure
@@ -11,7 +7,7 @@ namespace TodoList.Infraestructure
     {
         #region Tables
 
-        public DbSet<Domain.Task> Task { get; set; }
+        public DbSet<Assignment> Assignment { get; set; }
 
         public DbSet<Item> Item { get; set; }
 
@@ -26,13 +22,13 @@ namespace TodoList.Infraestructure
             base.OnModelCreating(m);
 
             m.Entity<Item>().ToTable(nameof(Item));
-            m.Entity<Domain.Task>().ToTable(nameof(Domain.Task));
+            m.Entity<Assignment>().ToTable(nameof(Assignment));
 
-            m.Entity<Domain.Task>().HasMany(t => t.Itens).WithOne(t => t.Task).HasForeignKey(t => t.TaskId);
-            m.Entity<Domain.Task>().Property(t => t.CreatedAt).ValueGeneratedOnAdd();
-            m.Entity<Domain.Task>().Property(t => t.UpdatedAt).ValueGeneratedOnAddOrUpdate();
+            m.Entity<Assignment>().HasMany(t => t.Itens).WithOne(t => t.Assignment).HasForeignKey(t => t.AssignmentId);
+            m.Entity<Assignment>().Property(t => t.CreatedAt).ValueGeneratedOnAdd();
+            m.Entity<Assignment>().Property(t => t.UpdatedAt).ValueGeneratedOnAddOrUpdate();
 
-            m.Entity<Item>().HasOne(i => i.Task).WithMany(i => i.Itens).HasForeignKey(i => i.TaskId);
+            m.Entity<Item>().HasOne(i => i.Assignment).WithMany(i => i.Itens).HasForeignKey(i => i.AssignmentId);
             m.Entity<Item>().Property(t => t.CreatedAt).ValueGeneratedOnAdd();
             m.Entity<Item>().Property(t => t.UpdatedAt).ValueGeneratedOnAddOrUpdate();
         }
