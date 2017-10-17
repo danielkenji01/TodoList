@@ -34,5 +34,14 @@ namespace TodoList.Features.Item
 
             return result;
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<Read.Result> Read(Read.Query query)
+        {
+            var result = await mediator.Send(query);
+
+            return result;
+        }
     }
 }
