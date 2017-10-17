@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TodoList.Infraestructure;
+using static TodoList.Infraestructure.HttpException;
 
 namespace TodoList.Features.Assignment
 {
@@ -37,6 +38,8 @@ namespace TodoList.Features.Assignment
             public async Task<Result> Handle(Query message)
             {
                 var assignment = await db.Assignment.FindAsync(message.Id);
+
+                if (assignment == null) throw new NotFoundException();
 
                 return new Result
                 {
