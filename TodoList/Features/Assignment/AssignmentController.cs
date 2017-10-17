@@ -10,11 +10,11 @@ using MediatR;
 namespace TodoList.Features.Task
 {
     [Route("api/[controller]")]
-    public class TaskController : Controller
+    public class AssignmentController : Controller
     {
         private IMediator mediator;
 
-        public TaskController(IMediator mediator)
+        public AssignmentController(IMediator mediator)
         {
             this.mediator = mediator;
         }
