@@ -1,9 +1,9 @@
-﻿using MediatR;
-using System;
+﻿using FluentValidation;
+using MediatR;
 using System.Threading.Tasks;
 using TodoList.Infraestructure;
 
-namespace TodoList.Features.Task
+namespace TodoList.Features.Assignment
 {
     public class Create
     {
@@ -23,7 +23,7 @@ namespace TodoList.Features.Task
                 this.db = db;
             }
 
-            public async System.Threading.Tasks.Task Handle(Command message)
+            public async Task Handle(Command message)
             {
                 var assignment = new Domain.Assignment()
                 {
