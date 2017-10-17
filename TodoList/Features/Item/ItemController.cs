@@ -43,5 +43,14 @@ namespace TodoList.Features.Item
 
             return result;
         }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete(Delete.Command command)
+        {
+            await mediator.Send(command);
+
+            return Ok();
+        }
     }
 }
