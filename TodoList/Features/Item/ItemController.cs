@@ -26,5 +26,13 @@ namespace TodoList.Features.Item
 
             return Ok();
         }
+
+        [HttpGet]
+        public async Task<IList<List.Result>> List()
+        {
+            var result = await mediator.Send(new List.Query());
+
+            return result;
+        }
     }
 }
