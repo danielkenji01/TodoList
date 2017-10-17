@@ -52,5 +52,15 @@ namespace TodoList.Features.Item
 
             return Ok();
         }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] Update.Command command)
+        {
+            command.Id = id;
+            await mediator.Send(command);
+
+            return Ok();
+        }
     }
 }
