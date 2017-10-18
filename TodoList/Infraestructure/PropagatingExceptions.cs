@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TodoList.Infraestructure
 {
@@ -25,7 +22,7 @@ namespace TodoList.Infraestructure
 
     public class NotFoundException : HttpException
     {
-        public NotFoundException() : base(400)
+        public NotFoundException() : base(404)
         {
         }
     }
