@@ -70,5 +70,14 @@ namespace TodoList.Features.Assignment
 
             return Ok();
         }
+
+        [HttpDelete]
+        [Route("{assignmentId}/item/{itemId}")]
+        public async Task<IActionResult> DeleteAssigmentItem(DeleteAssignmentItem.Command command)
+        {
+            await mediator.Send(command);
+
+            return Ok();
+        }
     }
 }
