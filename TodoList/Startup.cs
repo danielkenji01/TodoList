@@ -12,9 +12,14 @@ namespace TodoList
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
 
             DatabaseConfigurationAction = GetDatabaseConfiguration();
         }
@@ -29,10 +34,16 @@ namespace TodoList
             {
                 opt.Filters.Add(typeof(ValidationFilter));
             })
-            .AddFeatureFolders();
+                    .AddFeatureFolders()
+                    .AddJsonOptions(options =>
+                    {
+                        options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                    });
 
             services.AddDbContext<Db>(DatabaseConfigurationAction)
                     .AddAutoMapper(typeof(Startup));
+
+            Mapper.AssertConfigurationIsValid();
 
             services.AddMediatR(typeof(Startup));
             return services.BuildServiceProvider();
@@ -41,14 +52,19 @@ namespace TodoList
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
+            else app.UseExceptionHandler("/Home/Error");
 
-            app.UseMvc();
+            app.UseStaticFiles();
 
             app.UseMiddleware<Middleware>();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
 
         public virtual Action<DbContextOptionsBuilder> GetDatabaseConfiguration()
