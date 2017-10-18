@@ -61,5 +61,14 @@ namespace TodoList.Features.Assignment
 
             return Ok();
         }
+
+        [HttpPost]
+        [Route("{assignmentId}/item/{itemId}")]
+        public async Task<IActionResult> AssigmentItem(AssignmentItem.Command command)
+        {
+            await mediator.Send(command);
+
+            return Ok();
+        }
     }
 }
