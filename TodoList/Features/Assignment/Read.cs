@@ -1,10 +1,7 @@
 ﻿using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TodoList.Infraestructure;
-using static TodoList.Infraestructure.HttpException;
 
 namespace TodoList.Features.Assignment
 {
