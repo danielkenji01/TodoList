@@ -33,6 +33,8 @@ namespace TodoList.Features.Item
             {
                 var item = await db.Item.FindAsync(message.Id);
 
+                if (item == null || item.DeletedAt.HasValue) throw new NotFoundException();
+
                 if (message.Name != null) item.Name = message.Name;
 
                 if (message.IsFinished.ToString() != null) item.IsFinished = message.IsFinished;

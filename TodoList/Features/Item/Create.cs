@@ -11,8 +11,6 @@ namespace TodoList.Features.Item
     {
         public class Command : IRequest
         {
-            public Guid AssignmentId { get; set; }
-
             public string Name { get; set; }
 
             public string Description { get; set; }
@@ -35,8 +33,7 @@ namespace TodoList.Features.Item
                 {
                     Name = message.Name,
                     Description = message.Description,
-                    IsFinished = message.IsFinished,
-                    AssignmentId = message.AssignmentId
+                    IsFinished = message.IsFinished
                 };
 
                 db.Item.Add(item);

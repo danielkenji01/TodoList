@@ -18,8 +18,6 @@ namespace TodoList.Features.Item
         {
             public Guid Id { get; set; }
 
-            public Guid AssignmentId { get; set; }
-
             public string Name { get; set; }
 
             public string Description { get; set; }
@@ -42,14 +40,15 @@ namespace TodoList.Features.Item
             {
                 var item = await db.Item.FindAsync(message.Id);
 
+                if (item == null || item.DeletedAt.HasValue) throw new NotFoundException();
+
                 return new Result
                 {
                     Id = item.Id,
                     Name = item.Name,
                     Description = item.Description,
                     IsFinished = item.IsFinished,
-                    CreatedAt = item.CreatedAt,
-                    AssignmentId = item.AssignmentId
+                    CreatedAt = item.CreatedAt
                 };
             }
         }

@@ -18,8 +18,6 @@ namespace TodoList.Features.Item
         {
             public Guid Id { get; set; }
 
-            public Guid AssignmentId { get; set; }
-
             public string Name { get; set; }
 
             public string Description { get; set; }
@@ -48,8 +46,7 @@ namespace TodoList.Features.Item
                         Name = i.Name,
                         Description = i.Description,
                         IsFinished = i.IsFinished,
-                        CreatedAt = i.CreatedAt,
-                        AssignmentId = i.AssignmentId
+                        CreatedAt = i.CreatedAt
                     }).ToListAsync();
             }
         }
