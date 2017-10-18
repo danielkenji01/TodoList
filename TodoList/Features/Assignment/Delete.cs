@@ -27,6 +27,10 @@ namespace TodoList.Features.Assignment
             {
                 var assignment = await db.Assignment.FindAsync(message.Id);
 
+                if (assignment == null) throw new NotFoundException();
+
+                if (assignment.DeletedAt.HasValue) throw new NotFoundException();
+
                 assignment.DeletedAt = DateTime.Now;
 
                 await db.SaveChangesAsync();

@@ -31,6 +31,8 @@ namespace TodoList.Features.Assignment
             {
                 var assignment = await db.Assignment.FindAsync(message.Id);
 
+                if (assignment == null || assignment.DeletedAt.HasValue) throw new NotFoundException();
+
                 if (message.Name != null) assignment.Name = message.Name;
 
                 if (message.Description != null) assignment.Description = message.Description;

@@ -27,6 +27,8 @@ namespace TodoList.Features.Item
             {
                 var item = await db.Item.FindAsync(message.Id);
 
+                if (item == null || item.DeletedAt.HasValue) throw new NotFoundException();
+
                 item.DeletedAt = DateTime.Now;
 
                 await db.SaveChangesAsync();
