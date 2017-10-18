@@ -62,5 +62,14 @@ namespace TodoList.Features.Item
 
             return Ok();
         }
+
+        [HttpGet]
+        [Route("finished")]
+        public async Task<IList<FinishedItens.Result>> FinishedItens()
+        {
+            var result = await mediator.Send(new FinishedItens.Query());
+
+            return result;
+        }
     }
 }
