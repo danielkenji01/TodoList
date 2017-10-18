@@ -5,18 +5,18 @@ namespace TodoList.Infraestructure
 {
     public class Middleware
     {
-        private readonly RequestDelegate next;
+        private readonly RequestDelegate _next;
 
         public Middleware(RequestDelegate next)
         {
-            this.next = next;
+            _next = next;
         }
 
         public async Task Invoke(HttpContext context)
         {
             try
             {
-                await this.next(context);
+                await _next(context);
             }
             catch (HttpException e)
             {
