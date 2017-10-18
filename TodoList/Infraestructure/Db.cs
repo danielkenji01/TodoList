@@ -11,6 +11,8 @@ namespace TodoList.Infraestructure
 
         public DbSet<Item> Item { get; set; }
 
+        public DbSet<Assignment_Item> Assignment_Item { get; set; }
+
         #endregion Tables
 
         public Db(DbContextOptions<Db> options) : base(options)
@@ -23,14 +25,15 @@ namespace TodoList.Infraestructure
 
             m.Entity<Item>().ToTable(nameof(Item));
             m.Entity<Assignment>().ToTable(nameof(Assignment));
+            m.Entity<Assignment_Item>().ToTable(nameof(Assignment_Item));
 
-            m.Entity<Assignment>().HasMany(t => t.Itens).WithOne(t => t.Assignment).HasForeignKey(t => t.AssignmentId);
             m.Entity<Assignment>().Property(t => t.CreatedAt).ValueGeneratedOnAdd();
             m.Entity<Assignment>().Property(t => t.UpdatedAt).ValueGeneratedOnAddOrUpdate();
 
-            m.Entity<Item>().HasOne(i => i.Assignment).WithMany(i => i.Itens).HasForeignKey(i => i.AssignmentId);
             m.Entity<Item>().Property(t => t.CreatedAt).ValueGeneratedOnAdd();
             m.Entity<Item>().Property(t => t.UpdatedAt).ValueGeneratedOnAddOrUpdate();
+
+            m.Entity<Assignment_Item>().HasKey(ai => new { ai.AssignmentId, ai.ItemId }).ForSqlServerIsClustered(true);
         }
     }
 }
