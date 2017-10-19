@@ -34,7 +34,9 @@ namespace TodoList.Features.Assignment
 
             public async Task Handle(Command message)
             {
-                if (message.Description.Trim().Equals("") || message.Name.Trim().Equals("")) throw new HttpException(400);
+                if (message.Description == null || message.Description.Trim().Equals("")) throw new HttpException(400);
+
+                if (message.Name == null || message.Name.Trim().Equals("")) throw new HttpException(400);
 
                 var assignment = new Domain.Assignment()
                 {
