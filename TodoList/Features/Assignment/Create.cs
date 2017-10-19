@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
 using System.Threading.Tasks;
 using TodoList.Infraestructure;
 
