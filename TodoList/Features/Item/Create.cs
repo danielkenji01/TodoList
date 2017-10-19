@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TodoList.Infraestructure;
 
@@ -29,6 +27,10 @@ namespace TodoList.Features.Item
 
             public async Task Handle(Command message)
             {
+                if (message.Name == null || message.Name.Trim().Equals("")) throw new HttpException(400);
+
+                if (message.Description == null || message.Description.Trim().Equals("")) throw new HttpException(400);
+
                 var item = new Domain.Item()
                 {
                     Name = message.Name,
