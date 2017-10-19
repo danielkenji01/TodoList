@@ -27,6 +27,12 @@ namespace TodoList.Features.Assignment
 
             public async Task Handle(Command message)
             {
+                if (db.Assignment.SingleOrDefault(a => a.Id == message.AssignmentId) == null) throw new NotFoundException();
+
+                if (db.Item.SingleOrDefault(a => a.Id == message.ItemId) == null) throw new NotFoundException();
+
+                if (db.Assignment_Item.Any(a => a.ItemId == message.ItemId && a.AssignmentId == message.AssignmentId)) return;
+
                 var assignmentItem = new Domain.Assignment_Item()
                 {
                     AssignmentId = message.AssignmentId,
