@@ -14,15 +14,6 @@ namespace TodoList.Features.Assignment
             public string Description { get; set; }
         }
 
-        public class Validator : AbstractValidator<Command>
-        {
-            public Validator()
-            {
-                RuleFor(a => a.Name).NotEmpty().NotNull().Length(3, 100);
-                RuleFor(a => a.Description).NotEmpty().NotNull().Length(3, 200);
-            }
-        }
-
         public class CommandHandler : IAsyncRequestHandler<Command>
         {
             private readonly Db db;
