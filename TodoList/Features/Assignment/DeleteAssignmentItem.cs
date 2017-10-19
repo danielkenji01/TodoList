@@ -32,6 +32,10 @@ namespace TodoList.Features.Assignment
                     .Include(a => a.Assignment_Item)
                     .SingleOrDefault(a => a.Id == message.AssignmentId);
 
+                if (assignment == null) throw new NotFoundException();
+
+                if (!assignment.Assignment_Item.Any(a => a.ItemId == message.ItemId)) throw new NotFoundException();
+
                 db.Assignment_Item.RemoveRange(assignment.Assignment_Item.Where(ai => ai.ItemId == message.ItemId));
 
                 await db.SaveChangesAsync();
