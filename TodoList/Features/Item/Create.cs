@@ -33,8 +33,8 @@ namespace TodoList.Features.Item
 
                 var item = new Domain.Item()
                 {
-                    Name = message.Name,
-                    Description = message.Description,
+                    Name = message.Name.Trim(),
+                    Description = message.Description.Trim(),
                     IsFinished = message.IsFinished
                 };
 

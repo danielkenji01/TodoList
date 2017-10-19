@@ -30,8 +30,8 @@ namespace TodoList.Features.Assignment
 
                 var assignment = new Domain.Assignment()
                 {
-                    Name = message.Name,
-                    Description = message.Description
+                    Name = message.Name.Trim(),
+                    Description = message.Description.Trim()
                 };
 
                 db.Assignment.Add(assignment);
