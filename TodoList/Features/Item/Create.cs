@@ -27,9 +27,9 @@ namespace TodoList.Features.Item
 
             public async Task Handle(Command message)
             {
-                if (message.Name == null || message.Name.Trim().Equals("")) throw new HttpException(400);
+                if (message.Name == null || message.Name.Trim().Equals("") || message.Name.Trim().Length > 100) throw new HttpException(400);
 
-                if (message.Description == null || message.Description.Trim().Equals("")) throw new HttpException(400);
+                if (message.Description == null || message.Description.Trim().Equals("") || message.Description.Trim().Length > 200) throw new HttpException(400);
 
                 var item = new Domain.Item()
                 {
