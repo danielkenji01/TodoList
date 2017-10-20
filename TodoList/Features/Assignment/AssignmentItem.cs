@@ -31,7 +31,7 @@ namespace TodoList.Features.Assignment
 
                 if (db.Item.SingleOrDefault(a => a.Id == message.ItemId) == null) throw new NotFoundException();
 
-                if (db.Assignment_Item.Any(a => a.ItemId == message.ItemId && a.AssignmentId == message.AssignmentId)) return;
+                if (db.Assignment_Item.Where(a => a.Assignment.DeletedAt.HasValue && a.Item.DeletedAt.HasValue).Any(a => a.ItemId == message.ItemId && a.AssignmentId == message.AssignmentId)) throw new HttpException(404);
 
                 var assignmentItem = new Domain.Assignment_Item()
                 {
